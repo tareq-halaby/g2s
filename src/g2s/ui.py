@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import os
 import shutil
@@ -473,7 +474,7 @@ def create_ui_server(
                 return
 
             page = _HTML_PAGE.replace(
-                "__WORK_DIR__", str(state.work_dir).replace("\\", "\\\\")
+                "__WORK_DIR__", html.escape(str(state.work_dir))
             ).encode("utf-8")
             self.send_response(HTTPStatus.OK)
             self.send_header("Content-Type", "text/html; charset=utf-8")
